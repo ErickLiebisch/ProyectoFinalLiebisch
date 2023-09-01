@@ -1,4 +1,4 @@
-let Articulos =  JSON.parse(localStorage.getItem("Articulos")) || [];
+const Articulos =  JSON.parse(localStorage.getItem("Articulos")) || [];
 
 class articulo {
   constructor(Articulo, Categoria, Cantidad) {
@@ -8,18 +8,18 @@ class articulo {
   }
 }
 if(Articulos !=null){
-Articulos.forEach(element => {
-  let container = document.createElement("div");
-      container.innerHTML = `<h3>Articulo: ${element.Articulo}</h3>
-      <p> Categoria: ${element.Categoria}</p>
-      <p>Cantidad ${element.Cantidad}</p>`;
-      
-      container.className = "card card-body my-3"
-      container.style.width = "20rem"
-      document.body.append(container);
-      const containerCreado = container;     
-});
-}
+  Articulos.forEach(element => {
+    let container = document.createElement("div");
+        container.innerHTML = `<h3>Articulo: ${element.Articulo}</h3>
+        <p> Categoria: ${element.Categoria}</p>
+        <p>Cantidad ${element.Cantidad}</p>`;
+        
+        container.className = "card card-body my-3"
+        container.style.width = "20rem"
+        document.body.append(container);
+        const containerCreado = container;     
+  });
+  }
 
 let miFormulario = document.getElementById("formulario");
 miFormulario.onsubmit = async (e) => {
@@ -29,8 +29,10 @@ miFormulario.onsubmit = async (e) => {
   const Categoria = e.target.children[3].value;
   const Cantidad = e.target.children[7].value;
   const nuevoArticulo = new articulo(Articulo, Categoria, Cantidad);
-
+if(Articulos != null){
   Articulos.push(nuevoArticulo);
+}
+  
 
   localStorage.setItem("Articulos", JSON.stringify(Articulos));
   console.log(JSON.parse(localStorage.getItem("Articulos")));
